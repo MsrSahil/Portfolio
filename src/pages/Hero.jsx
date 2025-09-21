@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaCode, FaDownload } from "react-icons/fa";
-import { FiMousePointer } from "react-icons/fi"; // New icon for scroll indicator
+import { FiMousePointer } from "react-icons/fi";
 import Sahilimg from "../assets/SahilImg.jpg";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -23,7 +23,6 @@ const Hero = () => {
     },
   };
   
-  // New animation for the name
   const nameAnimation = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -56,7 +55,6 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
         >
-          {/* === ORBITING RINGS (NEW) === */}
           <motion.div
             className="absolute w-[320px] h-[320px] md:w-[400px] md:h-[400px] border-2 border-[#00ADB5]/30 rounded-full"
             animate={{ rotate: 360 }}
@@ -88,16 +86,27 @@ const Hero = () => {
             Hello, I'm
           </motion.h2>
 
-          {/* === ANIMATED NAME (NEW) === */}
+          {/* === NAME WRAP FIX === */}
           <motion.h1 
             variants={containerVariants}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#EEEEEE] mb-4 leading-tight"
           >
-            {"Mohd Swahil Rahmani".split("").map((char, index) => (
-              <motion.span key={index} variants={nameAnimation} className="inline-block">
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
+            {/* First part of the name */}
+            <div>
+              {"Mohd Swahil".split("").map((char, index) => (
+                <motion.span key={`first-${index}`} variants={nameAnimation} className="inline-block">
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </div>
+            {/* Second part of the name, will automatically go to the next line */}
+            <div>
+              {"Rahmani".split("").map((char, index) => (
+                <motion.span key={`last-${index}`} variants={nameAnimation} className="inline-block">
+                  {char}
+                </motion.span>
+              ))}
+            </div>
           </motion.h1>
 
           <motion.div variants={itemVariants} className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light mb-6 h-10">
@@ -118,7 +127,6 @@ const Hero = () => {
              Crafting robust and scalable web applications from front to back.
           </motion.p>
 
-          {/* Social Icons & CTA Buttons */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a
               href="#projects"
@@ -127,7 +135,7 @@ const Hero = () => {
               <FaCode /> View My Work
             </a>
             <a
-              href="MSR-Resume-Main.pdf" // Update with your resume file
+              href="MSR_FullStackDev_Resume.pdf"
               download
               className="px-8 py-3 border-2 border-[#00ADB5] text-[#00ADB5] font-semibold rounded-lg hover:bg-[#00ADB5] hover:text-[#222831] transition-all text-center flex items-center justify-center gap-2"
             >
@@ -145,21 +153,20 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* === SCROLL DOWN INDICATOR (NEW) === */}
       <motion.a
-          href="#about"
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 10 }}
-          transition={{
-              delay: 2,
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-          }}
+        href="#about"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0, y: 0 }}
+        animate={{ opacity: 1, y: 10 }}
+        transition={{
+          delay: 2,
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
       >
-          <FiMousePointer className="text-2xl text-gray-400" />
+        <FiMousePointer className="text-2xl text-gray-400" />
       </motion.a>
     </section>
   );

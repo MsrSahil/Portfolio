@@ -1,47 +1,51 @@
 import React, { useState, useEffect } from 'react';
-
-// Apne saare components import karein
+// Components
 import Nav from './pages/Nav';
 import Hero from './pages/Hero';
 import About from './pages/About';
-import Contact from './pages/Contact';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import Education from './pages/Education';
+import Contact from './pages/Contact';
 import Footer from './components/Footer';
+// Utilities
 import { Toaster } from 'react-hot-toast';
-import Loader from './components/Loader'; // 1. Loader ko import karein
+import Loader from './components/Loader';
+import CustomCursor from './components/CustomCursor';
+// New "All Over" Components
+
+import BackToTop from './components/BackToTop';
 
 function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Yeh website ke shuru hone par 2.5 seconds ka timer set karega
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2500); // Aap is time ko kam ya zyada kar sakte hain
-
+    const timer = setTimeout(() => setLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 
-  // 2. Agar loading true hai, to Loader component dikhayein
   if (loading) {
     return <Loader />;
   }
 
-  // 3. Loading false hone ke baad, poori website dikhayein
   return (
     <>
+      <CustomCursor />
       <Nav />
+    
       <Toaster />
 
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Education />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Education />
+        <Contact />
+      </main>
+      
       <Footer />
+      <BackToTop />
     </>
   );
 }
