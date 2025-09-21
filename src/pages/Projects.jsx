@@ -62,7 +62,7 @@ const Projects = () => {
       tech: ["React", "Framer Motion", "Tailwind CSS"],
       category: "frontend",
       github: "https://github.com/MsrSahil/Portfolio",
-      live: "https://portfolio-ivory-theta-30.vercel.app/",
+      live: "https://msr-portfolio021.vercel.app/",
       image: PortfolioImg,
     },
     {
