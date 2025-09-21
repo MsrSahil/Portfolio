@@ -9,10 +9,10 @@ import { FiGithub, FiExternalLink, FiX, FiStar } from "react-icons/fi";
 // Project images
 import PortfolioImg from "../assets/PortFolio.png";
 import Fruitables from "../assets/Fruitables.png";
-import ChatCoder from "../assets/ChatCoder.png";
-import AjSolutions from "../assets/Aj-Solutions.png";
+import ChatCoder from "../assets/ChatCoder.png";;
 import EventPlannerImg from "../assets/Event-Planner.png";
 import CalculatorImg from "../assets/Calculator.png";
+import vipmsr from "../assets/vipmsr.png";
 
 
 const Projects = () => {
@@ -36,7 +36,7 @@ const Projects = () => {
       category: "fullstack",
       github: "https://github.com/MsrSahil/viprepo",
       live: "https://viprepofrontend.netlify.app/",
-      image: AjSolutions,
+      image: vipmsr,
     },
     {
       title: "Event Planner App",
