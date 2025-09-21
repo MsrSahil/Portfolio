@@ -4,8 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
-// FiArrowRight icon added for the new button
-import { FiGithub, FiExternalLink, FiX, FiStar, FiArrowRight } from "react-icons/fi";
+import { FiGithub, FiExternalLink, FiX, FiStar } from "react-icons/fi";
 
 // Project images
 import PortfolioImg from "../assets/PortFolio.png";
@@ -23,7 +22,7 @@ const Projects = () => {
   const projects = [
     {
       title: "ChatCoder",
-      description: "A real-time collaborative coding platform built with the MERN stack and WebSockets, designed for developers to write, share, and debug code together seamlessly.",
+      description: "A real-time collaborative coding platform built with the MERN stack and WebSockets, for developers to write, share, and debug code together seamlessly.",
       tech: ["MERN", "Socket.io", "JWT Auth", "Code Execution API", "Tailwind CSS"],
       category: "fullstack",
       github: "https://github.com/MsrSahil/ChatCoder",
@@ -32,7 +31,7 @@ const Projects = () => {
     },
     {
       title: "AJ-Solutions",
-      description: "A comprehensive tech solutions company website featuring service listings, a client portal with secure authentication, and an integrated contact form for inquiries.",
+      description: "A comprehensive tech solutions company website featuring service listings, a client portal with secure authentication, and an integrated contact form.",
       tech: ["MERN Stack", "NodeMailer", "JWT Auth", "Cloudinary"],
       category: "fullstack",
       github: "https://github.com/MsrSahil/viprepo",
@@ -41,7 +40,7 @@ const Projects = () => {
     },
     {
       title: "Event Planner App",
-      description: "A full-stack event management application that allows users to create, manage, and schedule events with secure user authentication and detailed planning features.",
+      description: "A full-stack event management application that allows users to create, manage, and schedule events with secure user authentication.",
       tech: ["React", "Node.js", "MongoDB", "Express"],
       category: "fullstack",
       github: "https://github.com/MsrSahil/event-planner",
@@ -50,7 +49,7 @@ const Projects = () => {
     },
     {
       title: "Fruitables Clone",
-      description: "A responsive and visually appealing e-commerce front-end for a fruit and vegetable store, built with a focus on clean design and user experience.",
+      description: "A responsive and visually appealing e-commerce front-end for a fruit and vegetable store, built with a focus on clean design.",
       tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
       category: "frontend",
       github: "https://github.com/MsrSahil/Fruitable-Clone",
@@ -59,7 +58,7 @@ const Projects = () => {
     },
     {
       title: "Portfolio Website",
-      description: "An interactive personal portfolio built with modern technologies to showcase my skills, projects, and professional journey.",
+      description: "An interactive personal portfolio built to showcase my skills, projects, and professional journey.",
       tech: ["React", "Framer Motion", "Tailwind CSS"],
       category: "frontend",
       github: "https://github.com/MsrSahil/Portfolio",
@@ -77,75 +76,44 @@ const Projects = () => {
     },
   ];
 
-  const filteredProjects =
-    activeTab === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeTab);
+  // Logic is now simpler
+  const featuredProjects = projects.slice(0, 2);
+  const otherProjects = projects.slice(2);
+  const filteredProjects = projects.filter(p => activeTab === 'all' || p.category === activeTab);
 
   useEffect(() => {
     document.body.style.overflow = selectedProject ? "hidden" : "auto";
   }, [selectedProject]);
 
-  const buttonVariants = {
-    rest: { scale: 1 },
-    hover: { scale: 1.05 },
-  };
-
-  const arrowVariants = {
-    rest: { x: 0 },
-    hover: { x: 5, transition: { type: 'spring', stiffness: 300, damping: 15 } },
-  };
-
-  const renderProjectCard = (project, index) => (
+  const renderProjectCard = (project, index, isFeatured = false) => (
     <motion.div
-      key={index}
+      key={project.title + index} // Use a more unique key
       layout
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.4 }}
       whileHover={{ y: -10, boxShadow: "0 20px 40px -15px rgba(0, 173, 181, 0.3)" }}
+      onClick={() => setSelectedProject(project)}
       className="bg-[#2C313A]/80 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl cursor-pointer 
                  border border-[#00ADB5]/30 group h-full flex flex-col"
     >
       <div className="relative h-56 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-        />
+        <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-        
-        {index === 0 && activeTab === 'all' && (
-          <div className="absolute top-4 right-4 bg-[#00ADB5] text-[#222831] px-3 py-1 text-xs font-bold rounded-full flex items-center gap-1">
+        {isFeatured && (
+          <div className="absolute top-4 left-4 bg-[#00ADB5] text-[#222831] px-3 py-1 text-xs font-bold rounded-full flex items-center gap-1">
             <FiStar className="text-sm"/> Featured
           </div>
         )}
-
-        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
-          {/* === "VIEW DETAILS" BUTTON IMPROVED === */}
-          <motion.button
-            onClick={() => setSelectedProject(project)}
-            className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md text-white rounded-lg font-semibold border border-white/20"
-            variants={buttonVariants}
-            initial="rest"
-            whileHover="hover"
-          >
-            View Details
-            <motion.div variants={arrowVariants}>
-              <FiArrowRight />
-            </motion.div>
-          </motion.button>
+        {/* === VIEW DETAILS BUTTON REMOVED === */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
+            <div className="p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+                <FiExternalLink className="text-white text-3xl"/>
+            </div>
         </div>
       </div>
-
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-[#EEEEEE] mb-3 group-hover:text-[#00ADB5] transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
-          {project.description}
-        </p>
+        <h3 className="text-xl font-bold text-[#EEEEEE] mb-3 group-hover:text-[#00ADB5] transition-colors">{project.title}</h3>
+        <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">{project.description}</p>
         <div className="flex flex-wrap gap-2 mt-auto">
           {project.tech.slice(0, 4).map((tech, i) => (
             <span key={i} className="px-2 py-1 bg-[#393E46] rounded-full text-xs text-gray-300">{tech}</span>
@@ -158,55 +126,52 @@ const Projects = () => {
   return (
     <section id="projects" className="relative py-20 px-6 bg-gradient-to-tl from-[#1B2025] via-[#222831] to-[#2C313A] border-t border-[#00ADB5]/20 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-[#EEEEEE] font-heading">Featured Projects</h1>
+        <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-12">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-[#EEEEEE] font-heading">My Projects</h1>
           <div className="w-32 h-1 bg-[#00ADB5] rounded-full mx-auto mb-6" />
         </motion.div>
-
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {["all", "fullstack", "frontend"].map((tab) => (
-            <motion.button
-              key={tab}
-              whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveTab(tab)}
+            <motion.button key={tab} whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} onClick={() => setActiveTab(tab)}
               className={`px-8 py-3 rounded-full capitalize font-semibold transition-all duration-300 ${
                 activeTab === tab ? "bg-[#00ADB5] text-[#222831] shadow-lg shadow-[#00ADB5]/30" : "bg-[#393E46]/80 text-[#EEEEEE] hover:bg-[#00ADB5]/50"
               }`}
-            >
-              {tab}
-            </motion.button>
+            >{tab}</motion.button>
           ))}
         </div>
 
-        {activeTab === "all" ? (
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            navigation
-            spaceBetween={30}
-            slidesPerView={1}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-            className="pb-16"
-          >
-            {projects.map((project, index) => (
-              <SwiperSlide key={index} className="h-auto">{renderProjectCard(project, index)}</SwiperSlide>
-            ))}
-          </Swiper>
+        {/* === NEW LOGIC: SHOW SPECIAL LAYOUT ONLY FOR 'ALL' TAB === */}
+        {activeTab === 'all' ? (
+          <>
+            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              <AnimatePresence>{featuredProjects.map((p, i) => renderProjectCard(p, i, true))}</AnimatePresence>
+            </motion.div>
+            
+            {otherProjects.length > 0 && (
+              <>
+                <h2 className="text-3xl font-bold text-center text-white mb-8 font-heading">More Projects</h2>
+                <Swiper
+                  modules={[Navigation, Autoplay]} navigation spaceBetween={30} slidesPerView={1}
+                  autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }} loop={true}
+                  breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }} className="pb-16"
+                >
+                  {otherProjects.map((p, i) => (
+                    <SwiperSlide key={i} className="h-auto">{renderProjectCard(p, i)}</SwiperSlide>
+                  ))}
+                </Swiper>
+              </>
+            )}
+          </>
         ) : (
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence>{filteredProjects.map((project, index) => renderProjectCard(project, index))}</AnimatePresence>
+            <AnimatePresence>{filteredProjects.map((p, i) => renderProjectCard(p, i))}</AnimatePresence>
           </motion.div>
         )}
       </div>
 
       <AnimatePresence>
         {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedProject(null)}
           >
@@ -218,12 +183,7 @@ const Projects = () => {
             >
               <div className="relative">
                 <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 object-cover rounded-t-2xl" />
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 p-2 bg-black/50 rounded-full text-white hover:bg-[#00ADB5] transition-colors"
-                >
-                  <FiX size={20} />
-                </button>
+                <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 p-2 bg-black/50 rounded-full text-white hover:bg-[#00ADB5] transition-colors"><FiX size={20} /></button>
               </div>
               <div className="p-8">
                 <h2 className="text-3xl font-bold text-[#EEEEEE] mb-2">{selectedProject.title}</h2>
@@ -234,13 +194,9 @@ const Projects = () => {
                 </div>
                 <p className="text-gray-300 mb-6">{selectedProject.description}</p>
                 <div className="flex gap-4">
-                  <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#393E46] text-[#EEEEEE] rounded-lg hover:bg-gray-700 transition-colors">
-                    <FiGithub /> View Code
-                  </a>
+                  <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#393E46] text-[#EEEEEE] rounded-lg hover:bg-gray-700 transition-colors"><FiGithub /> View Code</a>
                   {selectedProject.live !== "#" && (
-                    <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#00ADB5] text-[#222831] rounded-lg font-semibold hover:bg-cyan-400 transition-colors">
-                      <FiExternalLink /> Live Demo
-                    </a>
+                    <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[#00ADB5] text-[#222831] rounded-lg font-semibold hover:bg-cyan-400 transition-colors"><FiExternalLink /> Live Demo</a>
                   )}
                 </div>
               </div>

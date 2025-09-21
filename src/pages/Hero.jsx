@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaCode, FaDownload } from "react-icons/fa";
-import { FiMousePointer } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
+// LeetCode icon imported
+import { SiLeetcode } from "react-icons/si";
 import Sahilimg from "../assets/SahilImg.jpg";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -32,12 +34,24 @@ const Hero = () => {
     },
   };
 
+  const chevronVariants = {
+    initial: { y: 0, opacity: 0.5 },
+    animate: {
+      y: [0, 10, 0],
+      opacity: [0.5, 1, 0.5],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <section
       id="home"
       className="relative w-full h-screen flex justify-center items-center px-6 overflow-hidden bg-[#222831]"
     >
-      {/* Background Blobs */}
       <div className="absolute inset-0 z-0">
         <motion.div
           className="absolute top-10 left-10 w-72 h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse"
@@ -48,7 +62,6 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-12 max-w-7xl mx-auto">
-        {/* Image Section */}
         <motion.div
           className="relative flex justify-center items-center"
           initial={{ opacity: 0, scale: 0.5 }}
@@ -75,7 +88,6 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Text Content Section */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -86,12 +98,10 @@ const Hero = () => {
             Hello, I'm
           </motion.h2>
 
-          {/* === NAME WRAP FIX === */}
           <motion.h1 
             variants={containerVariants}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#EEEEEE] mb-4 leading-tight"
           >
-            {/* First part of the name */}
             <div>
               {"Mohd Swahil".split("").map((char, index) => (
                 <motion.span key={`first-${index}`} variants={nameAnimation} className="inline-block">
@@ -99,7 +109,6 @@ const Hero = () => {
                 </motion.span>
               ))}
             </div>
-            {/* Second part of the name, will automatically go to the next line */}
             <div>
               {"Rahmani".split("").map((char, index) => (
                 <motion.span key={`last-${index}`} variants={nameAnimation} className="inline-block">
@@ -149,25 +158,29 @@ const Hero = () => {
             <a href="https://www.linkedin.com/in/swahil-mohd-5543a5259/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
               <FaLinkedin size={24} />
             </a>
+            {/* === LEETCODE LINK ADDED === */}
+            <a href="https://leetcode.com/u/MsrSahil/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
+              <SiLeetcode size={24} />
+            </a>
           </motion.div>
         </motion.div>
       </div>
 
-      <motion.a
-        href="#about"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0, y: 0 }}
-        animate={{ opacity: 1, y: 10 }}
-        transition={{
-          delay: 2,
-          duration: 1.5,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-        }}
-      >
-        <FiMousePointer className="text-2xl text-gray-400" />
-      </motion.a>
+      <a href="#about" className="absolute bottom-10 left-1/2 -translate-x-1/2">
+        <motion.div
+          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          initial="initial"
+          animate="animate"
+          className="flex flex-col items-center"
+        >
+          <motion.div variants={chevronVariants} transition={{...chevronVariants.animate.transition, delay: 0}}>
+              <FiChevronDown className="text-2xl text-gray-500" />
+          </motion.div>
+          <motion.div variants={chevronVariants} transition={{...chevronVariants.animate.transition, delay: 0.2}} className="-mt-2">
+              <FiChevronDown className="text-2xl text-gray-500" />
+          </motion.div>
+        </motion.div>
+      </a>
     </section>
   );
 };
