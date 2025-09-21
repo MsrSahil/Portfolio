@@ -2,6 +2,31 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaRocket, FaCrosshairs, FaCompass } from "react-icons/fa";
 
+// Card component to keep the code clean and reusable
+const FeatureCard = ({ icon, title, children, variants }) => (
+  <motion.div
+    variants={variants}
+    className="relative h-full"
+  >
+    {/* === ANIMATED GLOWING BORDER (NEW) === */}
+    <motion.div 
+      className="absolute -inset-0.5 bg-gradient-to-r from-[#00ADB5] to-cyan-500 rounded-3xl blur opacity-0 
+                 group-hover:opacity-75 transition duration-500"
+      initial={{ opacity: 0 }}
+      whileHover={{ opacity: 0.75, transition: { duration: 0.3 } }}
+    />
+    <div className="relative h-full bg-[#393E46] p-6 rounded-3xl leading-relaxed">
+      <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-3 font-heading">
+        {icon} {title}
+      </h3>
+      <div className="text-gray-300">
+        {children}
+      </div>
+    </div>
+  </motion.div>
+);
+
+
 const About = () => {
   const container = {
     hidden: { opacity: 0 },
@@ -27,7 +52,6 @@ const About = () => {
       bg-gradient-to-br from-[#222831] via-[#2C313A] to-[#1B2025] px-6 pt-24 md:pt-0 pb-12 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Heading */}
         <motion.div
           className="text-center mb-16 pt-12"
           initial={{ opacity: 0, y: -30 }}
@@ -56,62 +80,42 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 group" // Added group here
         >
-          {/* Card 1: Professional Summary */}
-          <motion.div
+          <FeatureCard 
             variants={item}
-            whileHover={{ y: -5, scale: 1.02 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            // === PADDING REDUCED FROM p-8 to p-6 ===
-            className="bg-[#393E46]/80 backdrop-blur-lg p-6 rounded-3xl border border-[#00ADB5]/30 
-            shadow-lg hover:shadow-2xl hover:shadow-[#00ADB5]/20"
+            icon={<FaRocket className="text-[#00ADB5]" />}
+            title="Professional Summary"
           >
-            <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-3 font-heading">
-              <FaRocket className="text-[#00ADB5]" /> Professional Summary
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
+            <p>
               As a Full Stack Developer, I specialize in transforming complex requirements into elegant, high-performance MERN stack applications. My focus is on writing clean, scalable code and delivering seamless user-centric solutions.
             </p>
-          </motion.div>
+          </FeatureCard>
 
-          {/* Card 2: My Development Approach */}
-          <motion.div
+          <FeatureCard 
             variants={item}
-            whileHover={{ y: -5, scale: 1.02 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="bg-[#393E46]/80 backdrop-blur-lg p-6 rounded-3xl border border-[#00ADB5]/30 
-            shadow-lg hover:shadow-2xl hover:shadow-[#00ADB5]/20"
+            icon={<FaCrosshairs className="text-[#00ADB5]" />}
+            title="My Development Approach"
           >
-            <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-3 font-heading">
-              <FaCrosshairs className="text-[#00ADB5]" /> My Development Approach
-            </h3>
-            {/* === CONTENT FORMATTING IMPROVED (NO BULLETS) === */}
-            <div className="text-gray-300 leading-relaxed space-y-3">
+            <div className="space-y-3">
               <p>
-                <strong className="font-semibold text-white">User-First:</strong> I begin every project by understanding the end-user's needs to ensure the final product is both intuitive and effective.
+                <strong className="font-semibold text-white">User-First:</strong> I begin every project by understanding the end-user's needs.
               </p>
               <p>
-                <strong className="font-semibold text-white">Clean Code:</strong> A firm believer in writing maintainable and well-documented code that stands the test of time.
+                <strong className="font-semibold text-white">Clean Code:</strong> A firm believer in writing maintainable and well-documented code.
               </p>
             </div>
-          </motion.div>
+          </FeatureCard>
 
-          {/* Card 3: Philosophy & Interests */}
-          <motion.div
+          <FeatureCard 
             variants={item}
-            whileHover={{ y: -5, scale: 1.02 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="bg-[#393E46]/80 backdrop-blur-lg p-6 rounded-3xl border border-[#00ADB5]/30 
-            shadow-lg hover:shadow-2xl hover:shadow-[#00ADB5]/20"
+            icon={<FaCompass className="text-[#00ADB5]" />}
+            title="Philosophy & Interests"
           >
-            <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-3 font-heading">
-              <FaCompass className="text-[#00ADB5]" /> Philosophy & Interests
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
-              My goal is to create digital tools that are not only powerful but also accessible and enjoyable to use. Beyond the keyboard, I'm passionate about contributing to the open-source community and exploring the latest advancements in web technology.
+            <p>
+              My goal is to create digital tools that are not only powerful but also accessible and enjoyable to use. Beyond the keyboard, I'm passionate about contributing to the open-source community.
             </p>
-          </motion.div>
+          </FeatureCard>
         </motion.div>
       </div>
     </section>
