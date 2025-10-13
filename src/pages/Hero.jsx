@@ -144,7 +144,7 @@ const Hero = () => {
               <FaCode /> View My Work
             </a>
             <a
-              href="./MSR-Resume-Main.pdf"
+              href="./Mohd Swahil Rahmani.pdf"
               download
               className="px-8 py-3 border-2 border-[#00ADB5] text-[#00ADB5] font-semibold rounded-lg hover:bg-[#00ADB5] hover:text-[#222831] transition-all text-center flex items-center justify-center gap-2"
             >
