@@ -52,7 +52,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: <FaGithub />, link: "https://github.com/MsrSahil", name: "GitHub" },
     { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/swahil-mohd-5543a5259/", name: "LinkedIn" },
-    { icon: <SiLeetcode />, link: "https://leetcode.com/u/MsrSahil/", name: "LeetCode" },
+  { icon: <SiLeetcode />, link: "https://leetcode.com/u/Mohd_Swahil/", name: "LeetCode" },
   ];
 
   return (

@@ -9,7 +9,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: <FaGithub size={22} />, link: "https://github.com/MsrSahil", name: "GitHub" },
     { icon: <FaLinkedin size={22} />, link: "https://www.linkedin.com/in/swahil-mohd-5543a5259/", name: "LinkedIn" },
-    { icon: <SiLeetcode size={22} />, link: "https://leetcode.com/u/MsrSahil/", name: "LeetCode" }
+  { icon: <SiLeetcode size={22} />, link: "https://leetcode.com/u/Mohd_Swahil/", name: "LeetCode" }
   ];
 
   const techStack = [

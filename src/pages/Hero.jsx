@@ -159,7 +159,7 @@ const Hero = () => {
               <FaLinkedin size={24} />
             </a>
             {/* === LEETCODE LINK ADDED === */}
-            <a href="https://leetcode.com/u/MsrSahil/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
+            <a href="https://leetcode.com/u/Mohd_Swahil/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
               <SiLeetcode size={24} />
             </a>
           </motion.div>
