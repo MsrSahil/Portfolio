@@ -2,71 +2,144 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaReact } from "react-icons/fa";
 import { SiLeetcode, SiTailwindcss, SiFramer } from "react-icons/si";
+import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <FaGithub size={22} />, link: "https://github.com/MsrSahil", name: "GitHub" },
-    { icon: <FaLinkedin size={22} />, link: "https://www.linkedin.com/in/swahil-mohd-5543a5259/", name: "LinkedIn" },
-  { icon: <SiLeetcode size={22} />, link: "https://leetcode.com/u/Mohd_Swahil/", name: "LeetCode" }
+    { icon: <FaGithub size={20} />, link: "https://github.com/MsrSahil", name: "GitHub" },
+    { icon: <FaLinkedin size={20} />, link: "https://www.linkedin.com/in/swahil-mohd-5543a5259/", name: "LinkedIn" },
+    { icon: <SiLeetcode size={20} />, link: "https://leetcode.com/u/Mohd_Swahil/", name: "LeetCode" }
   ];
 
   const techStack = [
-    { icon: <FaReact size={20} />, name: "React" },
-    { icon: <SiTailwindcss size={20} />, name: "Tailwind CSS" },
-    { icon: <SiFramer size={20} />, name: "Framer Motion" }
+    { icon: <FaReact size={18} />, name: "React" },
+    { icon: <SiTailwindcss size={18} />, name: "Tailwind CSS" },
+    { icon: <SiFramer size={18} />, name: "Framer Motion" }
+  ];
+
+  const quickLinks = [
+    { href: "#home", label: "Home" },
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#education", label: "Education" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
-    <footer className="bg-[#1B2025] text-gray-400 py-6 px-6 border-t border-[#00ADB5]/20">
+    <footer className="bg-[#1B2025] text-gray-300 pt-12 pb-6 px-6 border-t border-[#00ADB5]/20">
       <div className="max-w-7xl mx-auto">
-        {/* === NEW INTEGRATED LAYOUT === */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          
-          {/* Left Side: Brand & Copyright */}
-          <div className="text-center md:text-left">
-            <p className="text-xl font-bold bg-gradient-to-r from-white to-[#00ADB5] bg-clip-text text-transparent font-heading">
-              Mohd Swahil Rahmani
+        {/* Accent line */}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-[#00ADB5]/50 to-transparent mb-8" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Brand */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <a href="#home" className="text-2xl font-extrabold tracking-tight text-[#EAF1FA] hover:text-white transition-colors">MSR</a>
+              <span className="px-2 py-0.5 rounded-full text-[10px] bg-[#00ADB5]/15 text-[#77d8dd] border border-[#00ADB5]/30 inline-flex items-center gap-1">
+                <span className="relative inline-flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                </span>
+                Open to roles
+              </span>
+            </div>
+            <p className="text-sm text-[#B7C2D0] leading-relaxed max-w-xs">
+              Full‑stack developer crafting reliable, accessible experiences with modern web tech.
             </p>
-            <p className="text-xs text-gray-500 mt-1">
-              &copy; {year} All rights reserved.
-            </p>
-          </div>
-          
-          {/* Right Side: Socials & Tech Stack */}
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <div className="flex items-center space-x-5">
-              {socialLinks.map((social, index) => (
-                <motion.a 
-                  key={index}
-                  href={social.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-[#00ADB5] transition-colors"
-                  title={social.name}
-                  whileHover={{ y: -2, scale: 1.1 }}
+            <div className="mt-4 flex items-center gap-2 text-xs text-[#A4AEBC]">
+              <span className="opacity-80">Built with</span>
+              {techStack.map((t, i) => (
+                <span key={i} title={t.name} className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-[#232a32] border border-white/10 text-[#DDE3EE]">
+                  {t.icon}
+                  <span className="sr-only">{t.name}</span>
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.nav
+            aria-label="Footer navigation"
+            className="sm:justify-self-center"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.05 }}
+          >
+            <h3 className="text-sm font-semibold tracking-wide text-[#EAF1FA] mb-3">Quick Links</h3>
+            <ul className="space-y-2">
+              {quickLinks.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="text-sm text-[#B7C2D0] hover:text-[#00ADB5] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] rounded px-1">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+
+          {/* Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+          >
+            <h3 className="text-sm font-semibold tracking-wide text-[#EAF1FA] mb-3">Contact</h3>
+            <address className="not-italic text-sm space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-md bg-[#232a32] border border-white/10 text-[#00ADB5]"><FiMapPin /></div>
+                <div>Bhopal, MP, India</div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-md bg-[#232a32] border border-white/10 text-[#00ADB5]"><FiPhone /></div>
+                <a href="tel:+919532696691" className="hover:text-[#00ADB5] transition-colors">+91 9532696691</a>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-md bg-[#232a32] border border-white/10 text-[#00ADB5]"><FiMail /></div>
+                <a href="mailto:mohammadswahil021@gmail.com" className="hover:text-[#00ADB5] transition-colors break-all">mohammadswahil021@gmail.com</a>
+              </div>
+            </address>
+          </motion.div>
+
+          {/* Social */}
+          <motion.div
+            className="sm:justify-self-end"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.15 }}
+          >
+            <h3 className="text-sm font-semibold tracking-wide text-[#EAF1FA] mb-3">Follow</h3>
+            <div className="flex items-center gap-3">
+              {socialLinks.map((s, i) => (
+                <motion.a
+                  key={i}
+                  href={s.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className="p-2 rounded-lg bg-[#232a32] border border-white/10 text-[#EAF1FA] hover:text-[#00ADB5] hover:border-[#00ADB5]/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5]"
+                  whileHover={{ y: -3 }}
                 >
-                  {social.icon}
+                  {s.icon}
                 </motion.a>
               ))}
             </div>
+          </motion.div>
+        </div>
 
-            <div className="hidden sm:block w-px h-6 bg-gray-700"></div>
-
-            <div className="flex items-center space-x-3 text-gray-500">
-                <span className="text-xs">Built with</span>
-                {techStack.map((tech, index) => (
-                    <div 
-                        key={index} 
-                        className="flex items-center text-gray-400"
-                        title={tech.name}
-                    >
-                        {tech.icon}
-                    </div>
-                ))}
-            </div>
-          </div>
+        {/* Bottom bar */}
+        <div className="mt-10 pt-6 border-t border-white/10 flex items-center justify-center">
+          <p className="text-xs text-[#9AA3B2]">&copy; {year} Mohd Swahil Rahmani. All rights reserved.</p>
         </div>
       </div>
     </footer>

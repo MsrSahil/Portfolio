@@ -160,7 +160,7 @@ const Projects = () => {
       whileHover={{ y: -10, boxShadow: "0 20px 40px -15px rgba(0, 173, 181, 0.3)" }}
       onClick={() => setSelectedProject(project)}
       className="bg-[#2C313A]/80 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl cursor-pointer 
-                 border border-[#00ADB5]/30 group h-full flex flex-col"
+                 border border-[#00ADB5]/30 group h-full min-h-[520px] md:min-h-[540px] flex flex-col"
     >
       <div className="relative h-56 overflow-hidden">
         <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -287,7 +287,7 @@ const Projects = () => {
         {/* === NEW LOGIC: SHOW SPECIAL LAYOUT ONLY FOR 'ALL' TAB === */}
         {activeTab === 'all' ? (
           <>
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 items-stretch">
               <AnimatePresence>{featuredToShow.map((p, i) => renderProjectCard(p, i, true))}</AnimatePresence>
             </motion.div>
             
@@ -307,7 +307,7 @@ const Projects = () => {
             )}
           </>
         ) : (
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             <AnimatePresence>{filteredProjects.map((p, i) => renderProjectCard(p, i))}</AnimatePresence>
           </motion.div>
         )}

@@ -219,7 +219,7 @@ const Skills = () => {
         )}
 
         {/* Grouped Skill Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
           {grouped.map(({ category, items }, ci) => (
             <motion.div
               key={category}
@@ -227,7 +227,7 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: ci * 0.05 }}
-              className="rounded-2xl bg-gradient-to-br from-[#0f141b] to-[#121823] border border-white/10 p-6 md:p-7 hover:border-[#00ADB5]/30 transition-colors"
+              className="h-full flex flex-col rounded-2xl bg-gradient-to-br from-[#0f141b] to-[#121823] border border-white/10 p-6 md:p-7 hover:border-[#00ADB5]/30 transition-colors"
             >
               <div className="flex items-center justify-between mb-1">
                 <h4 className="text-[#F4F6FB] font-semibold text-lg">{category}</h4>
@@ -236,7 +236,7 @@ const Skills = () => {
               {category !== "All" && (
                 <div className="text-xs text-[#9AA3B2] mb-4">{categoryDescriptions[category]}</div>
               )}
-              <ul className="space-y-4">
+              <ul className="space-y-4 mt-2 flex-1">
                 {items.map((s) => (
                   <li key={s.name} className="group">
                     <div className="flex items-center gap-3">
