@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaReact } from "react-icons/fa";
 import { SiMongodb, SiExpress } from "react-icons/si";
@@ -9,6 +9,9 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const menuRef = useRef(null);
+  const menuButtonRef = useRef(null);
+  const lastActiveRef = useRef(null);
 
   const navItems = [
     { id: "home", label: "Home" },
@@ -45,6 +48,69 @@ const Nav = () => {
       observer.disconnect();
     };
   }, []);
+
+  // Mobile menu: scroll lock, focus trap, esc close, and restore focus
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (!isOpen) return;
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        return;
+      }
+      if (e.key === "Tab" && menuRef.current) {
+        const focusables = menuRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey) {
+          if (active === first || active === menuRef.current) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (active === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    };
+
+    if (isOpen) {
+      lastActiveRef.current = document.activeElement;
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", onKeyDown);
+      // Focus first menu item after open
+      setTimeout(() => {
+        const first = menuRef.current?.querySelector('a[href], button:not([disabled])');
+        (first || menuButtonRef.current)?.focus();
+      }, 0);
+    } else {
+      document.body.style.overflow = "";
+      if (lastActiveRef.current && typeof lastActiveRef.current.focus === "function") {
+        lastActiveRef.current.focus();
+      }
+      lastActiveRef.current = null;
+      window.removeEventListener("keydown", onKeyDown);
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen]);
+
+  // Close menu if resizing to desktop breakpoint
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 768 && isOpen) setIsOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [isOpen]);
 
   const navVariants = {
     hidden: { y: -100, opacity: 0 },
@@ -120,9 +186,12 @@ const Nav = () => {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <motion.button
+              ref={menuButtonRef}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 bg-[#393E46]/80 text-[#EEEEEE] rounded-lg"
+              aria-controls="mobile-menu"
+              aria-expanded={isOpen}
             >
               <AnimatePresence mode="wait">
                 {isOpen ? (
@@ -141,15 +210,17 @@ const Nav = () => {
       </div>
 
       {/* Mobile Nav */}
-      <AnimatePresence>
+          <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden absolute top-full left-0 w-full bg-[#222831]/95 backdrop-blur-lg border-t border-[#00ADB5]/30"
+            id="mobile-menu"
+            ref={menuRef}
           >
-            <ul className="px-4 pt-4 pb-6 space-y-2">
+            <ul className="px-4 pt-4 pb-6 space-y-2" role="menu">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <a
@@ -159,6 +230,7 @@ const Nav = () => {
                         ? "text-[#00ADB5] bg-[#393E46]"
                         : "text-[#EEEEEE] hover:text-[#00ADB5] hover:bg-[#393E46]/60"
                     }`}
+                    role="menuitem"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}

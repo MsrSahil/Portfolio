@@ -21,6 +21,8 @@ const Projects = () => {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("recent"); // recent | a-z
   const closeBtnRef = useRef(null);
+  const modalRef = useRef(null);
+  const lastActiveRef = useRef(null);
 
   const projects = [
     {
@@ -145,10 +147,44 @@ const Projects = () => {
 
   useEffect(() => {
     document.body.style.overflow = selectedProject ? "hidden" : "auto";
-    if (selectedProject && closeBtnRef.current) {
-      // Focus the close button for accessibility
-      closeBtnRef.current.focus();
+    const onKey = (e) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey) {
+          if (active === first || active === modalRef.current) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (active === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    };
+
+    if (selectedProject) {
+      lastActiveRef.current = document.activeElement;
+      window.addEventListener('keydown', onKey);
+      // Focus close as first control
+      if (closeBtnRef.current) closeBtnRef.current.focus();
+    } else if (lastActiveRef.current) {
+      // Restore focus back to previous trigger
+      if (typeof lastActiveRef.current.focus === 'function') {
+        lastActiveRef.current.focus();
+      }
+      lastActiveRef.current = null;
     }
+
+    return () => window.removeEventListener('keydown', onKey);
   }, [selectedProject]);
 
   const renderProjectCard = (project, index, isFeatured = false) => (
@@ -163,7 +199,14 @@ const Projects = () => {
                  border border-[#00ADB5]/30 group h-full min-h-[520px] md:min-h-[540px] flex flex-col"
     >
       <div className="relative h-56 overflow-hidden">
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        <img
+          src={project.image}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
         {isFeatured && (
           <div className="absolute top-4 left-4 bg-[#00ADB5] text-[#222831] px-3 py-1 text-xs font-bold rounded-full flex items-center gap-1">
@@ -326,11 +369,18 @@ const Projects = () => {
               aria-modal="true"
               aria-labelledby="project-modal-title"
               aria-describedby="project-modal-desc"
+              ref={modalRef}
               className="bg-[#2C313A] rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border border-[#00ADB5]/50"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
-                <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 object-cover rounded-t-2xl" />
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-64 object-cover rounded-t-2xl"
+                />
                 <button ref={closeBtnRef} onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 p-2 bg-black/50 rounded-full text-white hover:bg-[#00ADB5] transition-colors"><FiX size={20} /></button>
               </div>
               <div className="p-8">

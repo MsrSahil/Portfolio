@@ -93,7 +93,7 @@ const Education = () => {
           initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-[#EEEEEE] font-heading">My Education</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold mb-6 text-[#EEEEEE] font-heading">My Education</h1>
           <div className="w-32 h-1 bg-[#00ADB5] rounded-full mx-auto mb-6" />
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">My academic journey and qualifications.</p>
         </motion.div>
@@ -101,7 +101,7 @@ const Education = () => {
         <div ref={ref} className="relative">
           <motion.div 
             style={{ scaleY }}
-            className="absolute left-1/2 top-0 h-full w-1 bg-[#393E46] origin-top" 
+            className="absolute left-8 md:left-1/2 top-0 h-full w-1 bg-[#393E46] origin-top pointer-events-none" 
           />
 
           <motion.div
@@ -112,11 +112,11 @@ const Education = () => {
               <motion.div
                 key={index}
                 variants={index % 2 === 0 ? item : itemRight}
-                className="relative flex items-center"
+                className="relative flex items-start"
               >
                 <motion.div 
                   initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true, amount: 0.8 }} transition={{ duration: 0.5 }}
-                  className="absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-[#2C313A] border-4 border-[#00ADB5] rounded-full z-10 flex items-center justify-center"
+                  className="absolute left-8 md:left-1/2 md:-translate-x-1/2 w-10 h-10 md:w-12 md:h-12 bg-[#2C313A] border-4 border-[#00ADB5] rounded-full z-10 flex items-center justify-center"
                 >
                   <FaGraduationCap className="text-2xl text-[#00ADB5]" />
                 </motion.div>
@@ -124,11 +124,12 @@ const Education = () => {
                 <motion.div
                   whileHover={{ y: -5, scale: 1.02, boxShadow: "0px 15px 30px rgba(0, 173, 181, 0.2)" }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className={`relative w-[calc(50%-3rem)] bg-[#393E46]/80 backdrop-blur-sm rounded-2xl border border-[#00ADB5]/30 shadow-lg
-                    ${index % 2 === 0 ? "mr-auto" : "ml-auto"}`}
+                  className={`relative w-full md:w-[calc(50%-3rem)] ml-12 md:ml-0 bg-[#393E46]/80 backdrop-blur-sm rounded-2xl border border-[#00ADB5]/30 shadow-lg
+                    ${index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}
                 >
                   <div className={`absolute top-1/2 -translate-y-1/2 h-0 w-0 border-y-8 border-y-transparent
-                    ${index % 2 === 0 ? 'right-0 -mr-4 border-l-[8px] border-l-[#393E46]' : 'left-0 -ml-4 border-r-[8px] border-r-[#393E46]'}`}
+                    left-0 -ml-4 border-r-[8px] border-r-[#393E46]
+                    ${index % 2 === 0 ? 'md:right-0 md:left-auto md:-mr-4 md:-ml-0 md:border-l-[8px] md:border-l-[#393E46] md:border-r-0' : 'md:left-0 md:-ml-4 md:border-r-[8px] md:border-r-[#393E46]'}`}
                   />
                   
                   {/* === CARD CONTENT NOW HAS STAGGERED ANIMATION === */}
