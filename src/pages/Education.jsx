@@ -88,6 +88,11 @@ const Education = () => {
 
   return (
     <section id="education" className="relative w-full min-h-screen py-20 px-6 bg-gradient-to-tr from-[#1B2025] via-[#222831] to-[#2C313A] overflow-hidden">
+      {/* Background gradient blobs like Hero */}
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <div className="absolute top-8 left-8 w-40 h-40 sm:w-72 sm:h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-8 right-8 w-64 h-64 sm:w-96 sm:h-96 bg-[#EEEEEE]/5 rounded-full blur-3xl animate-pulse animation-delay-3000" />
+      </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}

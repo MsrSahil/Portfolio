@@ -25,6 +25,11 @@ const About = () => {
       id="about"
       className="relative flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-br from-[#222831] via-[#2C313A] to-[#1B2025] px-6 pt-24 md:pt-0 pb-16 overflow-hidden"
     >
+      {/* Background gradient blobs similar to Hero */}
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <div className="absolute top-6 left-6 w-40 h-40 sm:w-72 sm:h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-6 right-6 w-64 h-64 sm:w-96 sm:h-96 bg-[#EEEEEE]/5 rounded-full blur-3xl animate-pulse animation-delay-3000" />
+      </div>
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           className="mb-10 text-center"

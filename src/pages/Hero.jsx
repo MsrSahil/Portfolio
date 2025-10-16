@@ -86,7 +86,7 @@ const Hero = () => {
               alt="Mohd Swahil Rahmani"
               className="w-full h-full object-cover"
               loading="eager"
-              fetchpriority="high"
+              fetchPriority="high"
               sizes="(min-width: 768px) 20vw, 60vw"
             />
           </div>

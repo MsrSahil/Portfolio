@@ -52,7 +52,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: <FaGithub />, link: "https://github.com/MsrSahil", name: "GitHub" },
     { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/swahil-mohd-5543a5259/", name: "LinkedIn" },
-  { icon: <SiLeetcode />, link: "https://leetcode.com/u/Mohd_Swahil/", name: "LeetCode" },
+    { icon: <SiLeetcode />, link: "https://leetcode.com/u/MsrSahil/", name: "LeetCode" },
   ];
 
   return (
@@ -62,7 +62,12 @@ const Contact = () => {
       bg-gradient-to-bl from-[#1B2025] via-[#222831] to-[#2C313A] 
       overflow-hidden flex flex-col justify-center"
     >
-      <div className="max-w-7xl mx-auto z-10 w-full">
+      {/* Background gradient blobs like Hero */}
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <div className="absolute top-6 left-6 w-40 h-40 sm:w-72 sm:h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-6 right-6 w-64 h-64 sm:w-96 sm:h-96 bg-[#EEEEEE]/5 rounded-full blur-3xl animate-pulse animation-delay-3000" />
+      </div>
+      <div className="max-w-7xl mx-auto z-10 w-full relative">
         <motion.div
           initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
           className="text-center mb-16"

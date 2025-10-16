@@ -32,7 +32,7 @@ const ProgressBar = ({ value, color, label }) => {
           aria-valuenow={pct}
           aria-valuemin={0}
           aria-valuemax={100}
-          className={`h-2 ${color.replace("text-", "bg-")} rounded-full`}
+          className={`h-2 ${color.replace("text-", "bg-")} rounded-full progress-shimmer`}
           initial={{ width: 0 }}
           whileInView={{ width: `${pct}%` }}
           viewport={{ once: true }}
@@ -103,8 +103,13 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="relative w-full min-h-screen bg-gradient-to-br from-[#0d1016] via-[#161b26] to-[#0e1219] py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="relative w-full min-h-screen bg-[#222831] py-20 px-6 overflow-hidden">
+      {/* Background gradient blobs similar to Hero */}
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <div className="absolute top-6 left-6 w-40 h-40 sm:w-72 sm:h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-6 right-6 w-64 h-64 sm:w-96 sm:h-96 bg-[#EEEEEE]/5 rounded-full blur-3xl animate-pulse animation-delay-3000" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           className="mb-10 text-center"
@@ -114,8 +119,8 @@ const Skills = () => {
           transition={{ duration: 0.5 }}
         >
           <p className="uppercase tracking-[0.35em] text-xs text-[#00ADB5]/80 mb-3">Capabilities</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#F4F6FB]">Skills & Expertise</h2>
-          <p className="mt-4 text-[#C8D0E0] max-w-2xl mx-auto">A concise overview of my technical strengths across languages, frameworks, tools, and platforms.</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#EEEEEE]">Skills & Expertise</h2>
+          <p className="mt-4 text-gray-300 max-w-2xl mx-auto">A concise overview of my technical strengths across languages, frameworks, tools, and platforms.</p>
         </motion.div>
 
         {/* Search + Filters */}
@@ -128,7 +133,7 @@ const Skills = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search skills..."
-              className="w-full rounded-xl bg-[#0f141b] border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] text-[#E5EBF6] placeholder:text-[#9AA3B2] px-4 py-3"
+              className="w-full rounded-xl bg-[#1b2027] border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] text-[#E5EBF6] placeholder:text-[#9AA3B2] px-4 py-3"
             />
             <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#9AA3B2] text-sm">/{totalShown}</div>
           </div>
@@ -138,7 +143,7 @@ const Skills = () => {
         <div
           role="tablist"
           aria-label="Skill filters"
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="relative flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 mb-12 overflow-x-auto px-1 snap-x snap-mandatory"
           onKeyDown={(e) => {
             // Arrow navigation between filter tabs
             const idx = categories.indexOf(selectedCategory);
@@ -148,6 +153,10 @@ const Skills = () => {
             } else if (e.key === "ArrowLeft") {
               const prev = categories[(idx - 1 + categories.length) % categories.length];
               setSelectedCategory(prev);
+            } else if (e.key === "Home") {
+              setSelectedCategory(categories[0]);
+            } else if (e.key === "End") {
+              setSelectedCategory(categories[categories.length - 1]);
             }
           }}
         >
@@ -160,16 +169,19 @@ const Skills = () => {
                 aria-selected={active}
                 tabIndex={0}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] focus-visible:ring-offset-0 ${
+                className={`inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 snap-start border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#222831] ${
                   active
-                    ? "bg-[#00ADB5] text-[#0d1118] shadow shadow-[#00ADB5]/30"
-                    : "bg-[#0f141b] text-[#E5EBF6]/80 border border-white/10 hover:border-[#00ADB5]/50"
+                    ? "bg-[#00ADB5] text-[#222831] border-transparent shadow shadow-[#00ADB5]/30"
+                    : "bg-[#1b2027] text-[#E5EBF6]/85 border-white/10 hover:border-[#00ADB5]/50 hover:text-white"
                 }`}
               >
                 {cat}
               </button>
             );
           })}
+          {/* Gradient edge fades for horizontal scroll on mobile */}
+          <span aria-hidden className="pointer-events-none absolute left-0 top-0 h-full w-6 bg-gradient-to-r from-[#222831] to-transparent sm:hidden" />
+          <span aria-hidden className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-gradient-to-l from-[#222831] to-transparent sm:hidden" />
         </div>
 
         {/* Result stats */}
@@ -187,34 +199,34 @@ const Skills = () => {
             transition={{ duration: 0.4 }}
             className="mb-10 grid grid-cols-1 lg:grid-cols-3 gap-6"
           >
-            <div className="lg:col-span-2 rounded-2xl bg-gradient-to-br from-[#0f141b] to-[#121823] border border-white/10 p-6 md:p-8 hover:border-[#00ADB5]/30 transition-colors">
-              <div className="flex items-start gap-4">
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-[#2a323f] flex items-center justify-center text-red-400 text-2xl">
+            <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="lg:col-span-2 rounded-2xl bg-[#1b2027] border border-white/10 p-6 md:p-8 hover:border-[#00ADB5]/30 transition-colors shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_0_1px_rgba(0,173,181,0.25)]">
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                <div className="shrink-0 w-12 h-12 rounded-xl bg-[#1b2027] border border-white/10 flex items-center justify-center text-red-400 text-2xl">
                   <FaJava />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-[#F4F6FB] font-bold text-xl">Featured Skill: Java</h3>
-                  <p className="text-[#BFC7D6] mt-1 text-sm">Object-oriented programming, DSA with a focus on clarity and performance.</p>
+                  <h3 className="text-[#EEEEEE] font-bold text-xl">Featured Skill: Java</h3>
+                  <p className="text-gray-300 mt-1 text-sm">Object-oriented programming, DSA with a focus on clarity and performance.</p>
                 </div>
-                <div className="text-right">
-                  <div className="text-3xl font-extrabold text-[#F4F6FB]">{featured.value}%</div>
+                <div className="text-left sm:text-right mt-3 sm:mt-0 sm:ml-auto">
+                  <div className="text-3xl font-extrabold text-[#EEEEEE]">{featured.value}%</div>
                   <div className="text-xs text-[#9AA3B2]">proficiency</div>
                 </div>
               </div>
               <div className="mt-5">
                 <ProgressBar value={featured.value} color={featured.color} label="Java" />
               </div>
-            </div>
-            <div className="rounded-2xl bg-gradient-to-br from-[#0f141b] to-[#121823] border border-white/10 p-6 md:p-8 flex items-center justify-between hover:border-[#00ADB5]/30 transition-colors">
+            </motion.div>
+            <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="rounded-2xl bg-[#1b2027] border border-white/10 p-6 md:p-8 flex items-center justify-between hover:border-[#00ADB5]/30 transition-colors shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_0_1px_rgba(0,173,181,0.25)]">
               <div>
                 <div className="text-sm uppercase tracking-widest text-[#9AA3B2] mb-1">Primary Language</div>
-                <div className="text-2xl font-bold text-[#F4F6FB]">Backend & DSA</div>
-                <div className="text-sm text-[#BFC7D6] mt-1">Clean code • DS/Algo • API basics</div>
+                <div className="text-2xl font-bold text-[#EEEEEE]">Backend & DSA</div>
+                <div className="text-sm text-gray-300 mt-1">Clean code • DS/Algo • API basics</div>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-[#2a323f] flex items-center justify-center text-red-400 text-2xl">
+              <div className="w-14 h-14 rounded-xl bg-[#1b2027] border border-white/10 flex items-center justify-center text-red-400 text-2xl">
                 <FaJava />
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
 
@@ -227,10 +239,11 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: ci * 0.05 }}
-              className="h-full flex flex-col rounded-2xl bg-gradient-to-br from-[#0f141b] to-[#121823] border border-white/10 p-6 md:p-7 hover:border-[#00ADB5]/30 transition-colors"
+              whileHover={{ y: -3, transition: { type: "spring", stiffness: 300, damping: 24 } }}
+              className="h-full flex flex-col rounded-2xl bg-[#1b2027] border border-white/10 p-6 md:p-7 hover:border-[#00ADB5]/30 transition-colors shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_0_1px_rgba(0,173,181,0.25)]"
             >
               <div className="flex items-center justify-between mb-1">
-                <h4 className="text-[#F4F6FB] font-semibold text-lg">{category}</h4>
+                <h4 className="text-[#EEEEEE] font-semibold text-lg">{category}</h4>
                 <span className="text-xs px-2 py-1 rounded-full bg-[#00ADB5]/15 text-[#77d8dd] border border-[#00ADB5]/30">{items.length} skills</span>
               </div>
               {category !== "All" && (
@@ -240,12 +253,12 @@ const Skills = () => {
                 {items.map((s) => (
                   <li key={s.name} className="group">
                     <div className="flex items-center gap-3">
-                      <div className={`w-9 h-9 rounded-lg bg-[#1a2130] flex items-center justify-center ${s.color}`}>
+                      <div className={`w-9 h-9 rounded-lg bg-[#1b2027] border border-white/10 flex items-center justify-center ${s.color}`}>
                         {s.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[#E8EDF7] font-medium">{s.name}</span>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
+                          <span className="text-[#EEEEEE] font-medium">{s.name}</span>
                           <span className="flex items-center gap-2">
                             <span className={`text-[10px] px-2 py-0.5 rounded-full border ${levelFor(s.value).cls}`}>{levelFor(s.value).label}</span>
                             <span className="text-[#9AA3B2] text-xs">{s.value}%</span>
