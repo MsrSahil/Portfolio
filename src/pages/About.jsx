@@ -79,7 +79,7 @@ const About = () => {
 
               <div className="flex items-center gap-4 mb-4">
                 <a href="https://github.com/MsrSahil" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white" aria-label="GitHub"><FaGithub size={20} /></a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white" aria-label="LinkedIn"><FaLinkedin size={20} /></a>
+                <a href="https://www.linkedin.com/in/swahil-mohd-5543a5259/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white" aria-label="LinkedIn"><FaLinkedin size={20} /></a>
                 <a href="#contact" className="text-gray-300 hover:text-white" aria-label="Email"><FaEnvelope size={20} /></a>
               </div>
 
