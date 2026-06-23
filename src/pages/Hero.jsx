@@ -2,7 +2,6 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaCode, FaDownload } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
-// LeetCode icon imported
 import { SiLeetcode } from "react-icons/si";
 import Sahilimg from "../assets/SahilImg.jpg";
 import { Typewriter } from "react-simple-typewriter";

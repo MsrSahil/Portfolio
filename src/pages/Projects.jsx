@@ -38,7 +38,7 @@ const Projects = () => {
       highlights: ["Real-time code sync", "Auth & sessions", "Multi-room support"],
     },
     {
-      title: "AJ-Solutions",
+      title: "Tech Solutions Portal",
       description: "A comprehensive tech solutions company website featuring service listings, a client portal with secure authentication, and an integrated contact form.",
       tech: ["MERN Stack", "NodeMailer", "JWT Auth", "Cloudinary"],
       category: "fullstack",

@@ -53,14 +53,14 @@ const About = () => {
           >
             <div className="flex flex-col items-center text-center">
               <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[#00ADB5] to-transparent mb-4 flex items-center justify-center">
-                <div className="w-32 h-32 rounded-full bg-[#222831] flex items-center justify-center text-3xl font-bold text-white">MS</div>
+                <div className="w-32 h-32 rounded-full bg-[#222831] flex items-center justify-center text-3xl font-bold text-white">MSR</div>
               </div>
-              <h3 className="text-2xl font-semibold text-white">Sahil Mr</h3>
+              <h3 className="text-2xl font-semibold text-white">Mohd Swahil Rahmani</h3>
               <p className="text-sm text-gray-300 mb-4">Full Stack Developer (MERN)</p>
 
               <div className="flex gap-3 mb-4">
                 <a
-                  href="/resume.pdf"
+                  href="./Mohd Swahil Rahmani.pdf"
                   download
                   aria-label="Download resume"
                   className="inline-flex items-center justify-center gap-2 bg-[#00ADB5] text-black px-4 py-2 rounded-md font-medium hover:opacity-95 transition focus:outline-none focus:ring-2 focus:ring-[#00ADB5]/40"
