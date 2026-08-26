@@ -56,7 +56,7 @@ const About = () => {
                 <div className="w-32 h-32 rounded-full bg-[#222831] flex items-center justify-center text-3xl font-bold text-white">MSR</div>
               </div>
               <h3 className="text-2xl font-semibold text-white">Mohd Swahil Rahmani</h3>
-              <p className="text-sm text-gray-300 mb-4">Full Stack Developer (MERN)</p>
+              <p className="text-sm text-gray-300 mb-4">MERN Stack Developer</p>
 
               <div className="flex gap-3 mb-4">
                 <a
@@ -86,10 +86,10 @@ const About = () => {
               <div className="w-full mt-2">
                 <h4 className="text-sm text-white font-medium mb-2">Core</h4>
                 <ul className="text-gray-300 text-sm space-y-1">
-                  <li>React · JavaScript · HTML & CSS</li>
-                  <li>Node.js · Express · MongoDB</li>
-                  <li>Tailwind CSS · Git · Vite</li>
-                  <li>Java · DSA · OOPs</li>
+                  <li>React.js · JavaScript · Tailwind CSS</li>
+                  <li>Node.js · Express.js · MongoDB</li>
+                  <li>REST APIs · JWT Auth · Git</li>
+                  <li>DSA · OOPs · DBMS</li>
                 </ul>
               </div>
             </div>
@@ -106,7 +106,7 @@ const About = () => {
             <div className="bg-[#393E46]/60 backdrop-blur p-6 rounded-3xl border border-[#00ADB5]/20">
               <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-3"><FaRocket className="text-[#00ADB5]" /> Professional Summary</h3>
               <p className="text-gray-300 leading-relaxed">
-                I design and build user-focused web applications using modern JavaScript frameworks and Node.js backends. I prioritize readable, testable code and fast user experiences. I'm actively building projects that apply best practices in accessibility and performance.
+                I am a MERN Stack Developer and recent Computer Science graduate with a year of professional experience building scalable web applications. At BodhiWaves Venture Studio and VIP Digital Hub, I engineered production websites, built reusable React components, and integrated complex backend systems. From real-time messaging apps to interactive visualizers, my focus is on writing clean, maintainable code and delivering exceptional user experiences.
               </p>
             </div>
 
@@ -114,21 +114,19 @@ const About = () => {
               <div className="bg-[#393E46]/60 backdrop-blur p-6 rounded-3xl border border-[#00ADB5]/20 h-full flex flex-col justify-between">
                 <h4 className="text-lg font-semibold text-white mb-2 flex items-center gap-2"><FaCrosshairs className="text-[#00ADB5]" /> Competencies</h4>
                 <ul className="text-gray-300 text-sm space-y-2">
-                  <li>UI/UX design principles and best practices</li>
-                  <li>Java programming and DSA</li>
-                  <li>Component-driven UI with React and state management</li>
-                  <li>RESTful APIs with Node.js and Express</li>
-                  <li>Database work with MongoDB and schema design</li>
-                  <li>Responsive design and utility-first styling (Tailwind)</li>
+                  <li>Full Stack Web Development (MERN Stack: MongoDB, Express.js, React.js, Node.js)</li>
+                  <li>Building responsive, reusable React.js components</li>
+                  <li>REST API design & JWT-based authentication/authorization</li>
+                  <li>Data Structures & Algorithms, Object-Oriented Programming, DBMS</li>
+                  <li>Tools: Git, GitHub, Postman, Vercel, Netlify, Render, Cloudinary</li>
                 </ul>
               </div>
 
               <div className="bg-[#393E46]/60 backdrop-blur p-6 rounded-3xl border border-[#00ADB5]/20 h-full flex flex-col justify-between">
-                <h4 className="text-lg font-semibold text-white mb-2 flex items-center gap-2"><FaCompass className="text-[#00ADB5]" /> Selected Projects</h4>
+                <h4 className="text-lg font-semibold text-white mb-2 flex items-center gap-2"><FaCompass className="text-[#00ADB5]" /> Experience</h4>
                 <div className="text-gray-300 text-sm space-y-3">
-                  <div><strong>Pre Order Dining App</strong> — A restaurant pre-ordering app allowing customers to select dishes ahead of time, manage reservations and speed up service.</div>
-                  <div><strong>Chat Coder</strong> — A collaborative coding chat tool with code snippets sharing and syntax highlighting for pair-programming sessions.</div>
-                  <div><strong>Event Planner</strong> — An event management platform to create events, invite attendees and manage schedules and RSVPs.</div>
+                  <div><strong>MERN Stack Developer</strong>, BodhiWaves Venture Studio (Oct 2025 – May 2026): Developed and maintained production websites (bodhiwaves.com, bodhiwaves.media), built reusable React.js components, and optimized responsive UI across devices.</div>
+                  <div><strong>Web Development Intern</strong>, VIP Digital Hub IT & Software Solutions (Aug 2025 – Oct 2025): Built responsive interfaces, integrated third-party services, and assisted with Node.js/Express.js backend work.</div>
                 </div>
               </div>
             </div>

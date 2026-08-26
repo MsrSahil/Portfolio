@@ -13,6 +13,7 @@ import ChatCoder from "../assets/ChatCoder.png";
 import EventPlannerImg from "../assets/Event-Planner.png";
 import CalculatorImg from "../assets/Calculator.png";
 import vipmsr from "../assets/vipmsr.png";
+import DSAVisualizerImg from "../assets/DSA-Visualizer.png";
 
 
 const Projects = () => {
@@ -25,6 +26,18 @@ const Projects = () => {
   const lastActiveRef = useRef(null);
 
   const projects = [
+    {
+      title: "DSA Visualizer",
+      description: "An interactive MERN-stack learning platform for mastering Data Structures and Algorithms through step-by-step visualizations, dry runs, complexity analysis, and multi-language code implementations (JavaScript, Python, Java, C++). Includes full JWT-based authentication, a searchable algorithm library with 15 cataloged algorithms, and a personalized learning dashboard.",
+      tech: ["React 19", "Node.js", "Express 5", "MongoDB", "Mongoose", "JWT", "Tailwind CSS", "React Router DOM"],
+      category: "fullstack",
+      github: "https://github.com/MsrSahil/algoverse",
+      live: "#",
+      image: DSAVisualizerImg,
+      featured: true,
+      year: 2026,
+      highlights: ["Step-by-step visualizations", "15 cataloged algorithms", "Personalized dashboard"],
+    },
     {
       title: "ChatCoder",
       description: "A real-time collaborative coding platform built with the MERN stack and WebSockets, for developers to write, share, and debug code together seamlessly.",
@@ -45,7 +58,7 @@ const Projects = () => {
       github: "https://github.com/MsrSahil/viprepo",
       live: "https://viprepofrontend.netlify.app/",
       image: vipmsr,
-      featured: true,
+      featured: false,
       year: 2024,
       highlights: ["Client portal", "Email integration", "Responsive UI"],
     },
