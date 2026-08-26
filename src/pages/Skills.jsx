@@ -1,283 +1,241 @@
-import React, { useMemo, useState } from "react";
+﻿import React from "react";
 import { motion } from "framer-motion";
+import { FaReact, FaNodeJs, FaJava, FaGithub } from "react-icons/fa";
 import {
-  FaReact,
-  FaNodeJs,
-  FaJava,
-  FaFigma,
-  FaGithub,
-  FaBootstrap,
-  FaPython,
-} from "react-icons/fa";
-import { SiMongodb, SiExpress, SiTailwindcss, SiVite, SiCplusplus } from "react-icons/si";
+  SiNextdotjs,
+  SiMongodb,
+  SiExpress,
+  SiTailwindcss,
+  SiJsonwebtokens,
+  SiPostman,
+  SiVercel,
+  SiRender,
+} from "react-icons/si";
 import { DiJavascript, DiHtml5, DiCss3 } from "react-icons/di";
 
-const categories = ["All", "Frontend", "Backend", "Language", "Database", "Tools", "Design"];
-const categoryDescriptions = {
-  Language: "Primary programming languages and problem solving",
-  Frontend: "UI frameworks and styling systems for the web",
-  Backend: "Server frameworks and API development",
-  Database: "Datastores and persistence technologies",
-  Tools: "Build tools, version control and developer utilities",
-  Design: "Design tools and prototyping",
-};
+// ─── Skill badge chip ─────────────────────────────────────────────────────────
+const Badge = ({ label, icon }) => (
+  <motion.span
+    whileHover={{ y: -2, scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.05] text-[#EEEEEE] text-xs font-medium cursor-default hover:border-[#00ADB5]/50 hover:bg-[#00ADB5]/10 transition-all duration-200 whitespace-nowrap"
+  >
+    {icon && <span className="text-[#00ADB5] text-sm shrink-0">{icon}</span>}
+    {label}
+  </motion.span>
+);
 
-const ProgressBar = ({ value, color, label }) => {
-  const pct = Math.max(0, Math.min(100, Number(value) || 0));
-  return (
-    <div className="w-full" aria-label={`${label} proficiency`}>
-      <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-        <motion.div
-          role="progressbar"
-          aria-valuenow={pct}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          className={`h-2 ${color.replace("text-", "bg-")} rounded-full progress-shimmer`}
-          initial={{ width: 0 }}
-          whileInView={{ width: `${pct}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        />
-      </div>
-    </div>
-  );
-};
-
-const Skills = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [query, setQuery] = useState("");
-
-  const skills = useMemo(
-    () => [
-      { name: "Java", icon: <FaJava className="text-2xl" />, color: "text-red-400", category: "Language", value: 96 },
-      { name: "React", icon: <FaReact className="text-2xl" />, color: "text-cyan-400", category: "Frontend", value: 92 },
-      { name: "JavaScript", icon: <DiJavascript className="text-2xl" />, color: "text-yellow-400", category: "Language", value: 90 },
-      { name: "Node.js", icon: <FaNodeJs className="text-2xl" />, color: "text-green-500", category: "Backend", value: 90 },
-      { name: "MongoDB", icon: <SiMongodb className="text-2xl" />, color: "text-green-600", category: "Database", value: 95 },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-2xl" />, color: "text-sky-400", category: "Frontend", value: 90 },
-      { name: "Python", icon: <FaPython className="text-2xl" />, color: "text-yellow-500", category: "Language", value: 55 },
-      { name: "C++", icon: <SiCplusplus className="text-2xl" />, color: "text-blue-600", category: "Language", value: 70 },
-      { name: "Express", icon: <SiExpress className="text-2xl" />, color: "text-gray-400", category: "Backend", value: 90 },
-      { name: "HTML5", icon: <DiHtml5 className="text-2xl" />, color: "text-orange-500", category: "Frontend", value: 98 },
-      { name: "CSS3", icon: <DiCss3 className="text-2xl" />, color: "text-blue-500", category: "Frontend", value: 97 },
-      { name: "Bootstrap", icon: <FaBootstrap className="text-2xl" />, color: "text-purple-400", category: "Frontend", value: 80 },
-      { name: "Git & GitHub", icon: <FaGithub className="text-2xl" />, color: "text-gray-300", category: "Tools", value: 85 },
-      { name: "Vite", icon: <SiVite className="text-2xl" />, color: "text-purple-500", category: "Tools", value: 80 },
-      { name: "Figma", icon: <FaFigma className="text-2xl" />, color: "text-pink-400", category: "Design", value: 70 },
+// ─── Bento data ────────────────────────────────────────────────────────────────
+// NOTE: icon values are React elements — must be at module scope in a .jsx file.
+const bentoItems = [
+  {
+    id: "frontend",
+    tag: "// FRONTEND",
+    title: "Frontend Engineering",
+    desc: "UI frameworks, styling systems, and responsive design",
+    colSpan: "col-span-2 md:col-span-3",
+    accentColor: "text-cyan-400",
+    glowColor: "bg-cyan-400/10",
+    borderHover: "hover:border-cyan-400/40",
+    featured: true,
+    skills: [
+      { label: "React.js",          icon: <FaReact /> },
+      { label: "Next.js",           icon: <SiNextdotjs /> },
+      { label: "JavaScript ES6+",   icon: <DiJavascript /> },
+      { label: "Tailwind CSS",      icon: <SiTailwindcss /> },
+      { label: "HTML5",             icon: <DiHtml5 /> },
+      { label: "CSS3",              icon: <DiCss3 /> },
+      { label: "Responsive Design", icon: null },
     ],
-    []
-  );
+  },
+  {
+    id: "database",
+    tag: "// DATABASE",
+    title: "Data Storage",
+    desc: "Datastores, ODMs, and persistence",
+    colSpan: "col-span-2 md:col-span-1",
+    accentColor: "text-green-400",
+    glowColor: "bg-green-400/10",
+    borderHover: "hover:border-green-400/40",
+    featured: false,
+    skills: [
+      { label: "MongoDB",  icon: <SiMongodb /> },
+      { label: "Mongoose", icon: <SiMongodb /> },
+      { label: "SQL",      icon: null },
+    ],
+  },
+  {
+    id: "backend",
+    tag: "// BACKEND",
+    title: "Backend & API Architecture",
+    desc: "Server-side frameworks, REST APIs, and auth",
+    colSpan: "col-span-2 md:col-span-2",
+    accentColor: "text-emerald-400",
+    glowColor: "bg-emerald-400/10",
+    borderHover: "hover:border-emerald-400/40",
+    featured: false,
+    skills: [
+      { label: "Node.js",            icon: <FaNodeJs /> },
+      { label: "Express.js",         icon: <SiExpress /> },
+      { label: "RESTful APIs",       icon: null },
+      { label: "JWT Authentication", icon: <SiJsonwebtokens /> },
+      { label: "Authorization",      icon: null },
+    ],
+  },
+  {
+    id: "tools",
+    tag: "// LANGUAGES & TOOLING",
+    title: "Languages & DevOps",
+    desc: "Languages, deployment, and developer utilities",
+    colSpan: "col-span-2 md:col-span-2",
+    accentColor: "text-orange-400",
+    glowColor: "bg-orange-400/10",
+    borderHover: "hover:border-orange-400/40",
+    featured: false,
+    skills: [
+      { label: "Java",        icon: <FaJava /> },
+      { label: "Git / GitHub",icon: <FaGithub /> },
+      { label: "Postman",     icon: <SiPostman /> },
+      { label: "Vercel",      icon: <SiVercel /> },
+      { label: "Render",      icon: <SiRender /> },
+    ],
+  },
+  {
+    id: "cs",
+    tag: "// FUNDAMENTALS",
+    title: "Core CS Fundamentals",
+    desc: "Problem-solving foundations, algorithms, and system design principles",
+    colSpan: "col-span-2 md:col-span-4",
+    accentColor: "text-purple-400",
+    glowColor: "bg-purple-400/10",
+    borderHover: "hover:border-purple-400/40",
+    featured: false,
+    skills: [
+      { label: "Data Structures & Algorithms (DSA)", icon: null },
+      { label: "Object-Oriented Programming (OOP)",  icon: null },
+      { label: "DBMS",                               icon: null },
+    ],
+  },
+];
 
-  const filtered = useMemo(() => {
-    const byCategory = selectedCategory === "All" ? skills : skills.filter((s) => s.category === selectedCategory);
-    const q = query.trim().toLowerCase();
-    if (!q) return byCategory;
-    return byCategory.filter((s) => s.name.toLowerCase().includes(q));
-  }, [selectedCategory, skills, query]);
+// ─── Main component ────────────────────────────────────────────────────────────
+const Skills = () => (
+  <section
+    id="skills"
+    className="relative w-full min-h-screen bg-[#222831] py-20 px-6 overflow-hidden"
+  >
+    {/* Ambient background blobs */}
+    <div className="absolute inset-0 z-0" aria-hidden>
+      <div className="absolute top-6 left-6 w-40 h-40 sm:w-72 sm:h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-6 right-6 w-64 h-64 sm:w-96 sm:h-96 bg-[#EEEEEE]/5 rounded-full blur-3xl animate-pulse" />
+    </div>
 
-  const grouped = useMemo(() => {
-    const order = ["Language", "Frontend", "Backend", "Database", "Tools", "Design"];
-    const map = new Map(order.map((k) => [k, []]));
-    filtered.forEach((s) => {
-      if (!map.has(s.category)) map.set(s.category, []);
-      map.get(s.category).push(s);
-    });
-    order.forEach((k) => map.get(k)?.sort((a, b) => b.value - a.value));
-    return order.filter((k) => map.get(k)?.length).map((k) => ({ category: k, items: map.get(k) }));
-  }, [filtered]);
+    <div className="relative z-10 max-w-7xl mx-auto">
 
-  const featured = useMemo(() => {
-    if (selectedCategory !== "All" && selectedCategory !== "Language") return null;
-    return skills.find((s) => s.name.toLowerCase() === "java");
-  }, [selectedCategory, skills]);
+      {/* ── Section header ── */}
+      <motion.div
+        className="mb-14 text-center"
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <p className="font-mono uppercase tracking-[0.35em] text-[10px] text-[#00ADB5]/80 mb-3">
+          // TECH STACK & CAPABILITIES
+        </p>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-[#EEEEEE]">
+          Skills & Expertise
+        </h2>
+        <p className="mt-4 text-[#94a3b8] max-w-2xl mx-auto text-sm md:text-base">
+          A curated overview of my technical strengths — from frontend interfaces
+          to backend systems and core CS fundamentals.
+        </p>
+      </motion.div>
 
-  const totalShown = filtered.length;
-  const avgProficiency = totalShown
-    ? Math.round(filtered.reduce((sum, s) => sum + (Number(s.value) || 0), 0) / totalShown)
-    : 0;
-
-  const levelFor = (v) => {
-    if (v >= 90) return { label: "Advanced", cls: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" };
-    if (v >= 70) return { label: "Proficient", cls: "bg-sky-500/15 text-sky-300 border-sky-500/30" };
-    return { label: "Familiar", cls: "bg-zinc-500/15 text-zinc-300 border-zinc-500/30" };
-  };
-
-  return (
-    <section id="skills" className="relative w-full min-h-screen bg-[#222831] py-20 px-6 overflow-hidden">
-      {/* Background gradient blobs similar to Hero */}
-      <div className="absolute inset-0 z-0" aria-hidden>
-        <div className="absolute top-6 left-6 w-40 h-40 sm:w-72 sm:h-72 bg-[#00ADB5]/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-6 right-6 w-64 h-64 sm:w-96 sm:h-96 bg-[#EEEEEE]/5 rounded-full blur-3xl animate-pulse animation-delay-3000" />
-      </div>
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="mb-10 text-center"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="uppercase tracking-[0.35em] text-xs text-[#00ADB5]/80 mb-3">Capabilities</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#EEEEEE]">Skills & Expertise</h2>
-          <p className="mt-4 text-gray-300 max-w-2xl mx-auto">A concise overview of my technical strengths across languages, frameworks, tools, and platforms.</p>
-        </motion.div>
-
-        {/* Search + Filters */}
-        <div className="max-w-3xl mx-auto mb-6">
-          <label htmlFor="skill-search" className="sr-only">Search skills</label>
-          <div className="relative">
-            <input
-              id="skill-search"
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search skills..."
-              className="w-full rounded-xl bg-[#1b2027] border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] text-[#E5EBF6] placeholder:text-[#9AA3B2] px-4 py-3"
-            />
-            <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#9AA3B2] text-sm">/{totalShown}</div>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div
-          role="tablist"
-          aria-label="Skill filters"
-          className="relative flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 mb-12 overflow-x-auto px-1 snap-x snap-mandatory"
-          onKeyDown={(e) => {
-            // Arrow navigation between filter tabs
-            const idx = categories.indexOf(selectedCategory);
-            if (e.key === "ArrowRight") {
-              const next = categories[(idx + 1) % categories.length];
-              setSelectedCategory(next);
-            } else if (e.key === "ArrowLeft") {
-              const prev = categories[(idx - 1 + categories.length) % categories.length];
-              setSelectedCategory(prev);
-            } else if (e.key === "Home") {
-              setSelectedCategory(categories[0]);
-            } else if (e.key === "End") {
-              setSelectedCategory(categories[categories.length - 1]);
-            }
-          }}
-        >
-          {categories.map((cat) => {
-            const active = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                role="tab"
-                aria-selected={active}
-                tabIndex={0}
-                onClick={() => setSelectedCategory(cat)}
-                className={`inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 snap-start border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00ADB5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#222831] ${
-                  active
-                    ? "bg-[#00ADB5] text-[#222831] border-transparent shadow shadow-[#00ADB5]/30"
-                    : "bg-[#1b2027] text-[#E5EBF6]/85 border-white/10 hover:border-[#00ADB5]/50 hover:text-white"
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
-          {/* Gradient edge fades for horizontal scroll on mobile */}
-          <span aria-hidden className="pointer-events-none absolute left-0 top-0 h-full w-6 bg-gradient-to-r from-[#222831] to-transparent sm:hidden" />
-          <span aria-hidden className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-gradient-to-l from-[#222831] to-transparent sm:hidden" />
-        </div>
-
-        {/* Result stats */}
-        <div aria-live="polite" className="mb-8 text-center text-sm text-[#9AA3B2]">
-          Showing {totalShown} skill{totalShown === 1 ? "" : "s"}
-          {totalShown > 0 ? ` • Avg proficiency ${avgProficiency}%` : ""}
-        </div>
-
-        {/* Featured Java */}
-        {featured && (
+      {/* ── Bento grid ── */}
+      {/*
+        Layout (md = 4-col grid):
+          Row 1: Frontend (3 cols) | Database (1 col)
+          Row 2: Backend  (2 cols) | Tools    (2 cols)
+          Row 3: CS Fundamentals   (4 cols — full width)
+      */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+        {bentoItems.map((item, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            key={item.id}
+            className={item.colSpan}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-10 grid grid-cols-1 lg:grid-cols-3 gap-6"
+            transition={{ duration: 0.45, delay: i * 0.09 }}
           >
-            <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="lg:col-span-2 rounded-2xl bg-[#1b2027] border border-white/10 p-6 md:p-8 hover:border-[#00ADB5]/30 transition-colors shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_0_1px_rgba(0,173,181,0.25)]">
-              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-[#1b2027] border border-white/10 flex items-center justify-center text-red-400 text-2xl">
-                  <FaJava />
+            {/* Bento card */}
+            <motion.div
+              whileHover={{ y: -5 }}
+              transition={{ type: "spring", stiffness: 280, damping: 22 }}
+              className={
+                "group relative h-full rounded-2xl border border-white/10 " +
+                item.borderHover +
+                " bg-[#1b2027]/80 backdrop-blur-md p-5 md:p-6 overflow-hidden" +
+                " transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,173,181,0.15)]"
+              }
+            >
+              {/* ── Ambient spotlight glow (visible on hover) ── */}
+              <div
+                aria-hidden
+                className={
+                  "absolute -top-16 -left-16 w-56 h-56 rounded-full blur-3xl" +
+                  " opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none " +
+                  item.glowColor
+                }
+              />
+              {/* ── Secondary corner accent for featured card ── */}
+              {item.featured && (
+                <div
+                  aria-hidden
+                  className="absolute -bottom-20 -right-20 w-56 h-56 rounded-full blur-3xl opacity-30 bg-[#00ADB5]/20 pointer-events-none"
+                />
+              )}
+
+              {/* ── Card content ── */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Mono tag */}
+                <p
+                  className={
+                    "font-mono text-[10px] tracking-widest uppercase mb-1.5 " +
+                    item.accentColor
+                  }
+                >
+                  {item.tag}
+                </p>
+                {/* Title */}
+                <h3 className="text-[#EEEEEE] font-bold text-base md:text-lg leading-snug mb-1">
+                  {item.title}
+                </h3>
+                {/* Description */}
+                <p className="text-[#94a3b8] text-xs leading-relaxed mb-4">
+                  {item.desc}
+                </p>
+                {/* Thin rule */}
+                <div className="w-full h-px bg-white/[0.08] mb-4" />
+                {/* Badge cloud */}
+                <div className="flex flex-wrap gap-2 flex-1 content-start">
+                  {item.skills.map((skill) => (
+                    <Badge
+                      key={skill.label}
+                      label={skill.label}
+                      icon={skill.icon}
+                    />
+                  ))}
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-[#EEEEEE] font-bold text-xl">Featured Skill: Java</h3>
-                  <p className="text-gray-300 mt-1 text-sm">Object-oriented programming, DSA with a focus on clarity and performance.</p>
-                </div>
-                <div className="text-left sm:text-right mt-3 sm:mt-0 sm:ml-auto">
-                  <div className="text-3xl font-extrabold text-[#EEEEEE]">{featured.value}%</div>
-                  <div className="text-xs text-[#9AA3B2]">proficiency</div>
-                </div>
-              </div>
-              <div className="mt-5">
-                <ProgressBar value={featured.value} color={featured.color} label="Java" />
-              </div>
-            </motion.div>
-            <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="rounded-2xl bg-[#1b2027] border border-white/10 p-6 md:p-8 flex items-center justify-between hover:border-[#00ADB5]/30 transition-colors shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_0_1px_rgba(0,173,181,0.25)]">
-              <div>
-                <div className="text-sm uppercase tracking-widest text-[#9AA3B2] mb-1">Primary Language</div>
-                <div className="text-2xl font-bold text-[#EEEEEE]">Backend & DSA</div>
-                <div className="text-sm text-gray-300 mt-1">Clean code • DS/Algo • API basics</div>
-              </div>
-              <div className="w-14 h-14 rounded-xl bg-[#1b2027] border border-white/10 flex items-center justify-center text-red-400 text-2xl">
-                <FaJava />
               </div>
             </motion.div>
           </motion.div>
-        )}
-
-        {/* Grouped Skill Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
-          {grouped.map(({ category, items }, ci) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: ci * 0.05 }}
-              whileHover={{ y: -3, transition: { type: "spring", stiffness: 300, damping: 24 } }}
-              className="h-full flex flex-col rounded-2xl bg-[#1b2027] border border-white/10 p-6 md:p-7 hover:border-[#00ADB5]/30 transition-colors shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_0_1px_rgba(0,173,181,0.25)]"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <h4 className="text-[#EEEEEE] font-semibold text-lg">{category}</h4>
-                <span className="text-xs px-2 py-1 rounded-full bg-[#00ADB5]/15 text-[#77d8dd] border border-[#00ADB5]/30">{items.length} skills</span>
-              </div>
-              {category !== "All" && (
-                <div className="text-xs text-[#9AA3B2] mb-4">{categoryDescriptions[category]}</div>
-              )}
-              <ul className="space-y-4 mt-2 flex-1">
-                {items.map((s) => (
-                  <li key={s.name} className="group">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-9 h-9 rounded-lg bg-[#1b2027] border border-white/10 flex items-center justify-center ${s.color}`}>
-                        {s.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
-                          <span className="text-[#EEEEEE] font-medium">{s.name}</span>
-                          <span className="flex items-center gap-2">
-                            <span className={`text-[10px] px-2 py-0.5 rounded-full border ${levelFor(s.value).cls}`}>{levelFor(s.value).label}</span>
-                            <span className="text-[#9AA3B2] text-xs">{s.value}%</span>
-                          </span>
-                        </div>
-                        <div className="mt-2">
-                          <ProgressBar value={s.value} color={s.color} label={s.name} />
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+        ))}
       </div>
-    </section>
-  );
-};
+
+    </div>
+  </section>
+);
 
 export default Skills;
