@@ -159,7 +159,7 @@ const Hero = () => {
             <a href="https://github.com/MsrSahil" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
               <FaGithub size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/swahil-mohd-5543a5259/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
+            <a href="https://www.linkedin.com/in/mohd-swahil-5543a5259/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-300 hover:text-[#00ADB5] transition-all">
               <FaLinkedin size={24} />
             </a>
             {/* === LEETCODE LINK ADDED === */}
