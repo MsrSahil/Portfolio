@@ -14,7 +14,7 @@ import EventPlannerImg from "../assets/Event-Planner.png";
 import CalculatorImg from "../assets/Calculator.png";
 import vipmsr from "../assets/vipmsr.png";
 import DSAVisualizerImg from "../assets/DSA-Visualizer.png";
-
+import poojacoonect from "../assets/poojacoonect.png";
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState("all");
@@ -32,7 +32,7 @@ const Projects = () => {
       tech: ["React 19", "Node.js", "Express 5", "MongoDB", "Mongoose", "JWT", "Tailwind CSS", "React Router DOM"],
       category: "fullstack",
       github: "https://github.com/MsrSahil/algoverse",
-      live: "#",
+      live: "https://algoverse-eta.vercel.app",
       image: DSAVisualizerImg,
       featured: true,
       year: 2026,
@@ -46,7 +46,7 @@ const Projects = () => {
       github: "https://github.com/MsrSahil/ChatCoder",
       live: "https://elegant-torte-03fc73.netlify.app/",
       image: ChatCoder,
-      featured: true,
+      featured: false,
       year: 2025,
       highlights: ["Real-time code sync", "Auth & sessions", "Multi-room support"],
     },
@@ -61,6 +61,18 @@ const Projects = () => {
       featured: false,
       year: 2024,
       highlights: ["Client portal", "Email integration", "Responsive UI"],
+    },
+    {
+      title: "Puja Connect",
+      description: "A seamless platform to easily book pandits for various pujas, rituals, and spiritual ceremonies.",
+      tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+      category: "fullstack",
+      github: "#",
+      live: "https://pujaconnect-chi.vercel.app/",
+      image: poojacoonect,
+      featured: true,
+      year: 2026,
+      highlights: ["Pandit booking", "Spiritual services", "Responsive UI"],
     },
     {
       title: "Event Planner App",
