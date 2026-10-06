@@ -97,7 +97,7 @@ const Footer = () => {
             <address className="not-italic text-sm space-y-3">
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-md bg-[#232a32] border border-white/10 text-[#00ADB5]"><FiMapPin /></div>
-                <div>Bhopal, MP, India</div>
+                <div>Noida, UP, India</div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-md bg-[#232a32] border border-white/10 text-[#00ADB5]"><FiPhone /></div>

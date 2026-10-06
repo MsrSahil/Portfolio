@@ -44,7 +44,7 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: <FiMapPin />, title: "Location", content: "Bhopal, MP, India" },
+    { icon: <FiMapPin />, title: "Location", content: "Noida, UP, India" },
     { icon: <FiPhone />, title: "Phone", content: "+91 9532696691", link: "tel:+919532696691" },
     { icon: <FiMail />, title: "Email", content: "mohammadswahil021@gmail.com", link: "mailto:mohammadswahil021@gmail.com" },
   ];
