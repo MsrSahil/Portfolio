@@ -64,15 +64,15 @@ const Projects = () => {
     },
     {
       title: "Puja Connect",
-      description: "A seamless platform to easily book pandits for various pujas, rituals, and spiritual ceremonies.",
-      tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+      description: "A full-stack spiritual services platform that bridges devotees with verified pandits for pujas, havans, and religious ceremonies. Features a smart booking system with real-time availability, service categorization (Griha Pravesh, Satyanarayan Katha, Navratri, and more), secure user authentication, and an intuitive admin dashboard for pandit management. Built with a focus on cultural authenticity and seamless user experience.",
+      tech: ["React", "Node.js", "Express.js", "MongoDB", "Mongoose", "JWT Auth", "Tailwind CSS", "Vercel"],
       category: "fullstack",
       github: "https://github.com/MsrSahil/pujaconnect",
       live: "https://pujaconnect-chi.vercel.app/",
       image: poojacoonect,
       featured: true,
       year: 2026,
-      highlights: ["Pandit booking", "Spiritual services", "Responsive UI"],
+      highlights: ["Smart pandit booking system", "10+ ceremony categories", "JWT-based auth & admin dashboard"],
     },
     {
       title: "Event Planner App",
