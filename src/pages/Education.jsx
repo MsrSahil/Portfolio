@@ -23,7 +23,7 @@ const Education = () => {
       degree: "B.Tech, Computer Science Information Technology",
       institution: "Sagar Institute of Research & Technology",
       location: "Bhopal, Madhya Pradesh",
-      score: "6.01 CGPA",
+      score: "6.4 CGPA",
       year: "2022 - 2026",
     },
   ];
