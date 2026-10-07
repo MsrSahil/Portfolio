@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiGithub, FiExternalLink, FiX, FiStar } from "react-icons/fi";
 
 // Project images
-import PortfolioImg from "../assets/PortFolio.png";
+import PortfolioImg from "../assets/Portfolio.png";
 import Fruitables from "../assets/Fruitables.png";
 import ChatCoder from "../assets/ChatCoder.png";
 import EventPlannerImg from "../assets/Event-Planner.png";
