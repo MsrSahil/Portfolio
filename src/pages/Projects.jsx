@@ -67,7 +67,7 @@ const Projects = () => {
       description: "A seamless platform to easily book pandits for various pujas, rituals, and spiritual ceremonies.",
       tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
       category: "fullstack",
-      github: "#",
+      github: "https://github.com/MsrSahil/pujaconnect",
       live: "https://pujaconnect-chi.vercel.app/",
       image: poojacoonect,
       featured: true,
