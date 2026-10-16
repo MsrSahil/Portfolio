@@ -44,7 +44,7 @@ const Projects = () => {
       tech: ["MERN", "Socket.io", "JWT Auth", "Code Execution API", "Tailwind CSS"],
       category: "fullstack",
       github: "https://github.com/MsrSahil/ChatCoder",
-      live: "https://elegant-torte-03fc73.netlify.app/",
+      live: "https://chatcoder2.vercel.app/",
       image: ChatCoder,
       featured: false,
       year: 2025,
